@@ -29,13 +29,12 @@ export default function StudentRegister() {
       <Navbar />
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
         <div className="card">
-          <h1 className="text-center font-bold text-primary text-lg mb-6 uppercase tracking-wide">
+          <h1 className="text-center font-bold text-primary text-base sm:text-lg mb-6 uppercase tracking-wide">
             Fresh Student Registration Form
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Row 1 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="form-label">State of Domicile *</label>
                 <select className="form-select" value={form.state} onChange={e => set('state', e.target.value)} required>
@@ -52,8 +51,7 @@ export default function StudentRegister() {
               </div>
             </div>
 
-            {/* Row 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="form-label">Name (as in Mark Sheets) *</label>
                 <input className="form-input" value={form.name} onChange={e => set('name', e.target.value)} required />
@@ -64,8 +62,7 @@ export default function StudentRegister() {
               </div>
             </div>
 
-            {/* Row 3 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="form-label">Gender *</label>
                 <select className="form-select" value={form.gender} onChange={e => set('gender', e.target.value)} required>
@@ -81,8 +78,7 @@ export default function StudentRegister() {
               </div>
             </div>
 
-            {/* Row 4 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="form-label">Email ID *</label>
                 <input type="email" className="form-input" value={form.email} onChange={e => set('email', e.target.value)} required />
@@ -93,8 +89,7 @@ export default function StudentRegister() {
               </div>
             </div>
 
-            {/* Row 5 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="form-label">Aadhar Number *</label>
                 <input className="form-input" maxLength={12} value={form.aadhar} onChange={e => set('aadhar', e.target.value)} required />
@@ -105,8 +100,7 @@ export default function StudentRegister() {
               </div>
             </div>
 
-            {/* Row 6 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="form-label">Bank Account Number *</label>
                 <input className="form-input" value={form.bankAccount} onChange={e => set('bankAccount', e.target.value)} required />
@@ -117,8 +111,7 @@ export default function StudentRegister() {
               </div>
             </div>
 
-            {/* Password */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="form-label">Set Password *</label>
                 <input type="password" className="form-input" value={form.password} onChange={e => set('password', e.target.value)} required />
@@ -129,17 +122,19 @@ export default function StudentRegister() {
               </div>
             </div>
 
-            {/* Declaration */}
             <div className="flex items-start gap-3 bg-yellow-50 border border-yellow-200 rounded p-3">
-              <input type="checkbox" id="agree" className="mt-1" checked={form.agree} onChange={e => set('agree', e.target.checked)} />
+              <input type="checkbox" id="agree" className="mt-1 flex-shrink-0" checked={form.agree} onChange={e => set('agree', e.target.checked)} />
               <label htmlFor="agree" className="text-xs text-gray-600">
                 All the above information furnished by me is true to the best of my knowledge.
               </label>
             </div>
 
-            <div className="flex gap-4 justify-center">
-              <button type="submit" className="btn-primary px-10">Register</button>
-              <button type="reset" className="btn-secondary px-10" onClick={() => setForm({state:'',district:'',name:'',dob:'',gender:'',mobile:'',email:'',instituteCode:'',aadhar:'',bankIfsc:'',bankAccount:'',bankName:'',password:'',confirmPassword:'',agree:false})}>Reset</button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button type="submit" className="btn-primary px-10 w-full sm:w-auto">Register</button>
+              <button type="reset" className="btn-secondary px-10 w-full sm:w-auto"
+                onClick={() => setForm({state:'',district:'',name:'',dob:'',gender:'',mobile:'',email:'',instituteCode:'',aadhar:'',bankIfsc:'',bankAccount:'',bankName:'',password:'',confirmPassword:'',agree:false})}>
+                Reset
+              </button>
             </div>
           </form>
         </div>
