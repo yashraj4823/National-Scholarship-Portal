@@ -31,7 +31,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Banner */}
-      <div className="bg-gradient-to-r from-primary to-green-700 text-white py-4 text-center text-sm font-medium">
+      <div className="bg-gradient-to-r from-primary to-green-700 text-white py-3 px-4 text-center text-xs sm:text-sm font-medium">
         Scholarships for Students | Empowering Education | Government of India Initiative
       </div>
 
@@ -44,7 +44,7 @@ export default function Home() {
             <ul className="space-y-2">
               {updates.map((u, i) => (
                 <li key={i} className="flex gap-2 text-xs text-gray-700">
-                  <span className="text-secondary font-bold mt-0.5">▶</span>
+                  <span className="text-secondary font-bold mt-0.5 flex-shrink-0">▶</span>
                   <span>{u}</span>
                 </li>
               ))}
@@ -63,7 +63,7 @@ export default function Home() {
         <div className="card">
           <h2 className="section-title">About the Portal</h2>
           <p className="text-sm text-gray-600 mb-4">
-            The National Scholarship Portal is a one-stop solution for students to apply for various government scholarships. 
+            The National Scholarship Portal is a one-stop solution for students to apply for various government scholarships.
             It streamlines the process from application to disbursement, ensuring transparency and efficiency.
           </p>
           <h3 className="font-bold text-sm text-primary mb-3">Available Scholarship Schemes</h3>
