@@ -29,7 +29,7 @@ export default function MinistryDashboard() {
 
   const handleStudentAction = (id, action) => {
     setStudentApps(prev => prev.map(a => a.id === id ? { ...a, status: action === 'grant' ? 'Granted' : 'Rejected' } : a))
-    alert(action === 'grant' ? "Scholarship granted! Amount will be transferred to student's bank account." : 'Application rejected.')
+    alert(action === 'grant' ? 'Scholarship granted! Amount will be transferred to student\'s bank account.' : 'Application rejected.')
   }
 
   const handleInstAction = (id, action) => {
@@ -43,19 +43,19 @@ export default function MinistryDashboard() {
       <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-6 space-y-6">
 
         {/* Header */}
-        <div className="card flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="card flex items-center justify-between">
           <div>
             <h1 className="font-bold text-primary text-lg">Ministry Dashboard</h1>
             <p className="text-xs text-gray-500">Ministry of Education – National Scholarship Portal Admin</p>
           </div>
-          <button onClick={() => navigate('/')} className="btn-secondary text-xs w-full sm:w-auto">Logout</button>
+          <button onClick={() => navigate('/')} className="btn-secondary text-xs">Logout</button>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map(s => (
-            <div key={s.label} className={`border rounded-lg p-3 sm:p-4 text-center ${s.color}`}>
-              <p className="text-xl sm:text-2xl font-bold">{s.value}</p>
+            <div key={s.label} className={`border rounded-lg p-4 text-center ${s.color}`}>
+              <p className="text-2xl font-bold">{s.value}</p>
               <p className="text-xs mt-1">{s.label}</p>
             </div>
           ))}
@@ -63,54 +63,28 @@ export default function MinistryDashboard() {
 
         {/* Main Panel */}
         <div className="card">
-          {/* Tabs — scroll horizontally on very small screens */}
-          <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
-            {['students', 'institutes', 'schemes'].map(t => (
-              <button key={t} onClick={() => setTab(t)}
-                className={`px-4 py-2 rounded text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${tab === t ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200'}`}>
-                {t === 'students' ? 'Student Applications' : t === 'institutes' ? 'Institute Registrations' : 'Manage Schemes'}
-              </button>
-            ))}
+          <div className="flex gap-2 mb-6">
+            <button onClick={() => setTab('students')}
+              className={`px-4 py-2 rounded text-sm font-medium transition-colors ${tab === 'students' ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200'}`}>
+              Student Applications
+            </button>
+            <button onClick={() => setTab('institutes')}
+              className={`px-4 py-2 rounded text-sm font-medium transition-colors ${tab === 'institutes' ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200'}`}>
+              Institute Registrations
+            </button>
+            <button onClick={() => setTab('schemes')}
+              className={`px-4 py-2 rounded text-sm font-medium transition-colors ${tab === 'schemes' ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200'}`}>
+              Manage Schemes
+            </button>
           </div>
 
           {tab === 'students' && (
             <div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <div className="flex justify-between items-center mb-3">
                 <h2 className="section-title mb-0">Student Applications (Approved by State)</h2>
-                <button className="btn-primary text-xs px-4 py-1 w-full sm:w-auto">Fetch Forms</button>
+                <button className="btn-primary text-xs px-4 py-1">Fetch Forms</button>
               </div>
-
-              {/* Mobile cards */}
-              <div className="sm:hidden space-y-3">
-                {studentApps.map(app => (
-                  <div key={app.id} className="border rounded p-3 bg-white">
-                    <div className="flex justify-between items-start gap-2 mb-1">
-                      <div>
-                        <p className="font-semibold text-sm">{app.name}</p>
-                        <p className="text-xs text-gray-500">{app.scheme}</p>
-                        <p className="text-xs text-gray-400">{app.state} · {app.id}</p>
-                        <p className="text-xs font-semibold text-green-700 mt-1">{app.amount}</p>
-                      </div>
-                      <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${
-                        app.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
-                        app.status === 'Granted' ? 'bg-green-100 text-green-700' :
-                        'bg-red-100 text-red-700'
-                      }`}>{app.status}</span>
-                    </div>
-                    {app.status === 'Pending' && (
-                      <div className="flex gap-2 mt-2">
-                        <button onClick={() => handleStudentAction(app.id, 'grant')}
-                          className="flex-1 text-xs bg-green-600 text-white px-2 py-1.5 rounded hover:bg-green-700">Grant</button>
-                        <button onClick={() => handleStudentAction(app.id, 'reject')}
-                          className="flex-1 text-xs bg-red-500 text-white px-2 py-1.5 rounded hover:bg-red-600">Reject</button>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Desktop table */}
-              <div className="hidden sm:block overflow-x-auto">
+              <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-primary text-white text-xs">
@@ -158,41 +132,11 @@ export default function MinistryDashboard() {
 
           {tab === 'institutes' && (
             <div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <div className="flex justify-between items-center mb-3">
                 <h2 className="section-title mb-0">Institute Registration Applications</h2>
-                <button className="btn-primary text-xs px-4 py-1 w-full sm:w-auto">Fetch Forms</button>
+                <button className="btn-primary text-xs px-4 py-1">Fetch Forms</button>
               </div>
-
-              {/* Mobile cards */}
-              <div className="sm:hidden space-y-3">
-                {instApps.map(app => (
-                  <div key={app.id} className="border rounded p-3 bg-white">
-                    <div className="flex justify-between items-start gap-2 mb-1">
-                      <div>
-                        <p className="font-semibold text-sm">{app.name}</p>
-                        <p className="text-xs text-gray-500">{app.state} · {app.type}</p>
-                        <p className="text-xs text-gray-400">ID: {app.id}</p>
-                      </div>
-                      <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${
-                        app.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
-                        app.status === 'Approved' ? 'bg-green-100 text-green-700' :
-                        'bg-red-100 text-red-700'
-                      }`}>{app.status}</span>
-                    </div>
-                    {app.status === 'Pending' && (
-                      <div className="flex gap-2 mt-2">
-                        <button onClick={() => handleInstAction(app.id, 'approve')}
-                          className="flex-1 text-xs bg-green-600 text-white px-2 py-1.5 rounded hover:bg-green-700">Approve</button>
-                        <button onClick={() => handleInstAction(app.id, 'reject')}
-                          className="flex-1 text-xs bg-red-500 text-white px-2 py-1.5 rounded hover:bg-red-600">Reject</button>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Desktop table */}
-              <div className="hidden sm:block overflow-x-auto">
+              <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-primary text-white text-xs">
@@ -247,12 +191,12 @@ export default function MinistryDashboard() {
                   { name: 'National Merit Scholarship', active: false, applicants: 12400 },
                   { name: 'Central Scholarship Scheme', active: true, applicants: 25052 },
                 ].map(s => (
-                  <div key={s.name} className="flex items-center justify-between border rounded p-3 gap-3">
-                    <div className="min-w-0">
+                  <div key={s.name} className="flex items-center justify-between border rounded p-3">
+                    <div>
                       <p className="text-sm font-semibold">{s.name}</p>
                       <p className="text-xs text-gray-500">{s.applicants.toLocaleString()} applicants</p>
                     </div>
-                    <span className={`text-xs px-3 py-1 rounded-full font-medium flex-shrink-0 ${s.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <span className={`text-xs px-3 py-1 rounded-full font-medium ${s.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                       {s.active ? 'Active' : 'Inactive'}
                     </span>
                   </div>

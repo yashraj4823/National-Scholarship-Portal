@@ -32,7 +32,7 @@ export default function InstituteRegister() {
       <Navbar />
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
         <div className="card">
-          <h1 className="text-center font-bold text-primary text-base sm:text-lg mb-6 uppercase tracking-wide">
+          <h1 className="text-center font-bold text-primary text-lg mb-6 uppercase tracking-wide">
             Institute Registration Request Form
           </h1>
 
@@ -41,7 +41,7 @@ export default function InstituteRegister() {
             {/* BASIC DETAILS */}
             <section>
               <h2 className="section-title">Basic Details</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="form-label">Institute Category *</label>
                   <select className="form-select" value={form.category} onChange={e => set('category', e.target.value)} required>
@@ -120,7 +120,8 @@ export default function InstituteRegister() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+              {/* Password */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div>
                   <label className="form-label">Set Password *</label>
                   <input type="password" className="form-input" value={form.password} onChange={e => set('password', e.target.value)} required />
@@ -136,22 +137,18 @@ export default function InstituteRegister() {
             <section>
               <h2 className="section-title">Proof of Existence of Institute</h2>
               <div className="space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-gray-50 border rounded p-3">
+                <div className="flex items-center justify-between bg-gray-50 border rounded p-3">
                   <span className="text-xs text-gray-600 uppercase tracking-wide">Institute Establishment / Registration Certificate *</span>
-                  <label className="cursor-pointer self-start sm:self-auto">
+                  <label className="cursor-pointer">
                     <input type="file" className="hidden" onChange={e => set('estCert', e.target.files[0])} />
-                    <span className="border border-gray-400 text-xs px-4 py-1.5 rounded hover:bg-gray-100 block text-center">
-                      {form.estCert ? form.estCert.name : 'Upload'}
-                    </span>
+                    <span className="border border-gray-400 text-xs px-4 py-1 rounded hover:bg-gray-100">Upload</span>
                   </label>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-gray-50 border rounded p-3">
+                <div className="flex items-center justify-between bg-gray-50 border rounded p-3">
                   <span className="text-xs text-gray-600 uppercase tracking-wide">University / Board Affiliation Certificate *</span>
-                  <label className="cursor-pointer self-start sm:self-auto">
+                  <label className="cursor-pointer">
                     <input type="file" className="hidden" onChange={e => set('affCert', e.target.files[0])} />
-                    <span className="border border-gray-400 text-xs px-4 py-1.5 rounded hover:bg-gray-100 block text-center">
-                      {form.affCert ? form.affCert.name : 'Upload'}
-                    </span>
+                    <span className="border border-gray-400 text-xs px-4 py-1 rounded hover:bg-gray-100">Upload</span>
                   </label>
                 </div>
               </div>
@@ -160,7 +157,7 @@ export default function InstituteRegister() {
             {/* ADDRESS */}
             <section>
               <h2 className="section-title">Address</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><label className="form-label">Line 1 *</label><input className="form-input" value={form.addr1} onChange={e => set('addr1', e.target.value)} required /></div>
                 <div><label className="form-label">Line 2</label><input className="form-input" value={form.addr2} onChange={e => set('addr2', e.target.value)} /></div>
                 <div><label className="form-label">City *</label><input className="form-input" value={form.city} onChange={e => set('city', e.target.value)} required /></div>
@@ -185,7 +182,7 @@ export default function InstituteRegister() {
             {/* CONTACT DETAILS */}
             <section>
               <h2 className="section-title">Contact Details</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><label className="form-label">Principal Name *</label><input className="form-input" value={form.principal} onChange={e => set('principal', e.target.value)} required /></div>
                 <div><label className="form-label">Mobile Number *</label><input className="form-input" maxLength={10} value={form.mobile} onChange={e => set('mobile', e.target.value)} required /></div>
                 <div><label className="form-label">Telephone</label><input className="form-input" value={form.telephone} onChange={e => set('telephone', e.target.value)} /></div>
@@ -194,15 +191,15 @@ export default function InstituteRegister() {
 
             {/* DECLARATION */}
             <div className="flex items-start gap-3 bg-yellow-50 border border-yellow-200 rounded p-3">
-              <input type="checkbox" id="agree" className="mt-1 flex-shrink-0" checked={form.agree} onChange={e => set('agree', e.target.checked)} />
+              <input type="checkbox" id="agree" className="mt-1" checked={form.agree} onChange={e => set('agree', e.target.checked)} />
               <label htmlFor="agree" className="text-xs text-gray-600">
                 All the details and documents submitted by us are valid and true. If found guilty of submitting invalid documents, we may be held responsible for that act by us.
               </label>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button type="submit" className="btn-primary px-10 w-full sm:w-auto">Submit</button>
-              <button type="reset" className="btn-secondary px-10 w-full sm:w-auto">Reset</button>
+            <div className="flex gap-4 justify-center">
+              <button type="submit" className="btn-primary px-10">Submit</button>
+              <button type="reset" className="btn-secondary px-10">Reset</button>
             </div>
           </form>
         </div>
