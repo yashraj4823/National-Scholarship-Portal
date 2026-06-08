@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Government emblem">
+  <rect width="64" height="64" rx="10" fill="#ffffff"/>
+  <rect width="64" height="18" fill="#FF9933"/>
+  <rect y="18" width="64" height="28" fill="#ffffff"/>
+  <rect y="46" width="64" height="18" fill="#138808"/>
+  <g transform="translate(32,32)">
+    <circle r="9" fill="#102A43" />
+    <circle r="5" fill="#ffffff" />
+    <circle r="2" fill="#102A43" />
+  </g>
+</svg>

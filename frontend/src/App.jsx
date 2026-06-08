@@ -3,9 +3,12 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import StudentRegister from './pages/StudentRegister'
 import StudentDashboard from './pages/StudentDashboard'
+import StudentProfile from './pages/StudentProfile'
+import RequireAuth from './components/RequireAuth'
 import ScholarshipForm from './pages/ScholarshipForm'
 import InstituteRegister from './pages/InstituteRegister'
 import InstituteDashboard from './pages/InstituteDashboard'
+import InstituteProfile from './pages/InstituteProfile'
 import StateDashboard from './pages/StateDashboard'
 import MinistryDashboard from './pages/MinistryDashboard'
 
@@ -18,8 +21,10 @@ export default function App() {
         <Route path="/register/student" element={<StudentRegister />} />
         <Route path="/register/institute" element={<InstituteRegister />} />
         <Route path="/dashboard/student" element={<StudentDashboard />} />
+        <Route path="/dashboard/student/profile" element={<RequireAuth role="student"><StudentProfile /></RequireAuth>} />
         <Route path="/dashboard/student/apply/:schemeId" element={<ScholarshipForm />} />
         <Route path="/dashboard/institute" element={<InstituteDashboard />} />
+        <Route path="/dashboard/institute/profile" element={<RequireAuth role="institute"><InstituteProfile /></RequireAuth>} />
         <Route path="/dashboard/state" element={<StateDashboard />} />
         <Route path="/dashboard/ministry" element={<MinistryDashboard />} />
         <Route path="*" element={<Navigate to="/" />} />

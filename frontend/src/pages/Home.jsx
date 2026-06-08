@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import FieldError from '../components/FieldError'
 import { login } from '../api/auth'
+import { getSchemes } from '../api/schemes'
 import { useAuth } from '../context/AuthContext'
 import { useValidation } from '../hooks/useValidation'
 import { fieldClass } from '../utils/fieldClass'
@@ -30,6 +31,9 @@ export default function Home() {
   const [loginType, setLoginType] = useState('')
   const [apiError, setApiError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [schemes, setSchemes] = useState([])
+  const [selectedScheme, setSelectedScheme] = useState(null)
+  const [loadingSchemes, setLoadingSchemes] = useState(true)
 
   const { errors, touched, validate, touch, touchAll } = useValidation(rules)
 
@@ -56,6 +60,13 @@ export default function Home() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    getSchemes()
+      .then(({ data }) => setSchemes(data))
+      .catch(() => setSchemes([]))
+      .finally(() => setLoadingSchemes(false))
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -91,28 +102,94 @@ export default function Home() {
 
         {/* Center */}
         <div className="card">
-          <h2 className="section-title">About the Portal</h2>
-          <p className="text-sm text-gray-600 mb-4">
-            The National Scholarship Portal is a one-stop solution for students to apply for various government scholarships.
-            It streamlines the process from application to disbursement, ensuring transparency and efficiency.
-          </p>
-          <h3 className="font-bold text-sm text-primary mb-3">Available Scholarship Schemes</h3>
-          <div className="space-y-3">
-            {[
-              { name: 'Post Matric Scholarship (Merit-cum-Means)', tag: 'SC/ST/OBC/Minority', color: 'bg-green-50 border-green-200' },
-              { name: 'Pragati Scholarship for Girls', tag: 'Girls | Income < ₹8L/yr', color: 'bg-blue-50 border-blue-200' },
-              { name: 'NTSE – National Talent Search', tag: 'Merit Based | Class IX', color: 'bg-orange-50 border-orange-200' },
-              { name: 'National Merit Scholarship', tag: 'Merit Based', color: 'bg-purple-50 border-purple-200' },
-              { name: 'Central Scholarship Scheme', tag: 'Central Govt.', color: 'bg-yellow-50 border-yellow-200' },
-            ].map((s, i) => (
-              <div key={i} className={`border rounded p-3 ${s.color}`}>
-                <p className="text-sm font-semibold text-gray-800">{s.name}</p>
-                <span className="text-xs text-gray-500">{s.tag}</span>
+            <h2 className="section-title">About the Portal</h2>
+            <p className="text-sm text-gray-600 mb-4">
+              The National Scholarship Portal is a one-stop solution for students to apply for various government scholarships.
+              It streamlines the process from application to disbursement, ensuring transparency and efficiency.
+            </p>
+            <h3 className="font-bold text-sm text-primary mb-3">Available Scholarship Schemes</h3>
+            {loadingSchemes ? (
+              <p className="text-xs text-gray-400">Loading schemes...</p>
+            ) : schemes.length === 0 ? (
+              <p className="text-xs text-gray-400">No schemes available right now.</p>
+            ) : (
+              <div className="space-y-3">
+                {schemes.map((s) => (
+                  <button
+                    key={s._id}
+                    type="button"
+                    onClick={() => setSelectedScheme(s)}
+                    className={`w-full text-left border rounded p-3 transition-all hover:bg-gray-50 ${s.isActive ? 'bg-white' : 'bg-gray-50 cursor-not-allowed opacity-80'}`}
+                    disabled={!s.isActive}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold text-gray-800">{s.name}</p>
+                        <p className="text-xs text-gray-500 mt-1">{s.tag || 'General'}</p>
+                      </div>
+                      <span className="text-xs font-semibold text-green-700">{s.amount}</span>
+                    </div>
+                  </button>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        </div>
-
+          {selectedScheme && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+              <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+                <div className="sticky top-0 bg-white border-b flex items-center justify-between p-4">
+                  <div>
+                    <h3 className="font-bold text-lg text-primary">{selectedScheme.name}</h3>
+                    <p className="text-xs text-gray-500">{selectedScheme.tag || 'General Eligibility'}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedScheme(null)}
+                    className="text-gray-500 hover:text-gray-700 text-2xl leading-none"
+                  >
+                    ×
+                  </button>
+                </div>
+                <div className="p-6 space-y-4 text-sm text-gray-700">
+                  <div>
+                    <p className="font-semibold">Description</p>
+                    <p className="text-xs text-gray-600 mt-1">{selectedScheme.description}</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <p className="font-semibold">Eligibility</p>
+                      <p className="text-xs text-gray-600 mt-1">{selectedScheme.eligibility}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Amount</p>
+                      <p className="text-xs text-gray-600 mt-1">{selectedScheme.amount}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Deadline</p>
+                      <p className="text-xs text-gray-600 mt-1">{new Date(selectedScheme.deadline).toLocaleDateString('en-IN')}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Status</p>
+                      <p className="text-xs text-gray-600 mt-1">{selectedScheme.isActive ? 'Active' : 'Inactive'}</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold">Applicants</p>
+                      <p className="text-xs text-gray-600 mt-1">{selectedScheme.applicantsCount ?? 0}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedScheme(null)}
+                      className="btn-secondary text-sm"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         {/* Right: Login Panel */}
         <div className="card border-t-4 border-primary">
           <h2 className="section-title">Login</h2>

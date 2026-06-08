@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -14,6 +14,7 @@ export default function StudentDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [myApps, setMyApps] = useState([])
   const [loadingSchemes, setLoadingSchemes] = useState(true)
+  const appsRef = useRef(null)
 
   useEffect(() => {
     getSchemes()
@@ -72,7 +73,19 @@ export default function StudentDashboard() {
               </div>
               <nav className="space-y-1">
                 {['My Profile', 'Check Status', 'Logout'].map(item => (
-                  <button key={item} onClick={() => item === 'Logout' && handleLogout()}
+                  <button key={item}
+                    onClick={() => {
+                      if (item === 'Logout') return handleLogout()
+                      if (item === 'My Profile') return navigate('/dashboard/student/profile')
+                      if (item === 'Check Status') {
+                        if (appsRef.current) {
+                          appsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        } else {
+                          window.scrollTo({ top: 0, behavior: 'smooth' })
+                        }
+                        return
+                      }
+                    }}
                     className="w-full text-left px-3 py-2 text-sm rounded hover:bg-green-50 hover:text-primary transition-colors">
                     {item}
                   </button>
