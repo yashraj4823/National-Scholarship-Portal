@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import ForgotPassword from './pages/ForgotPassword'
 import StudentRegister from './pages/StudentRegister'
 import StudentDashboard from './pages/StudentDashboard'
 import StudentProfile from './pages/StudentProfile'
@@ -18,6 +19,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register/student" element={<StudentRegister />} />
         <Route path="/register/institute" element={<InstituteRegister />} />
         <Route path="/dashboard/student" element={<StudentDashboard />} />

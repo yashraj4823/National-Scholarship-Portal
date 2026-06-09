@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import FieldError from '../components/FieldError'
@@ -78,15 +78,15 @@ export default function Home() {
 
       <section className="max-w-7xl mx-auto w-full px-4 py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="card-alt">
+          <div className="card-alt card-hover">
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-primary">Trusted Scholarship Platform</p>
             <p className="mt-3 text-sm text-slate-600">National Scholarship Portal helps students apply, track, and receive scholarships with a secure and modern interface.</p>
           </div>
-          <div className="card-alt">
+          <div className="card-alt card-hover">
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-primary">Faster Approval Flow</p>
             <p className="mt-3 text-sm text-slate-600">Streamlined application submission and approval status updates make every step easier for applicants and institutes.</p>
           </div>
-          <div className="card-alt">
+          <div className="card-alt card-hover">
             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-primary">Transparent Process</p>
             <p className="mt-3 text-sm text-slate-600">Track your application progress in real time and stay informed with clear status updates.</p>
           </div>
@@ -97,7 +97,7 @@ export default function Home() {
 
         {/* Left */}
         <div className="flex flex-col gap-4">
-          <div className="card border-l-4 border-primary">
+          <div className="card card-hover border-l-4 border-primary">
             <h2 className="section-title">Latest Updates</h2>
             <ul className="space-y-2">
               {updates.map((u, i) => (
@@ -108,7 +108,7 @@ export default function Home() {
               ))}
             </ul>
           </div>
-          <div className="card border-l-4 border-secondary">
+          <div className="card card-hover border-l-4 border-secondary">
             <h2 className="section-title section-title-secondary">Helpdesk</h2>
             <p className="text-xs text-slate-600 mb-2">For technical issues or queries:</p>
             <p className="text-xs font-semibold">📞 Toll Free: 1800-101-3898</p>
@@ -264,7 +264,7 @@ export default function Home() {
               {loading ? 'Logging in...' : 'Login'}
             </button>
             <div className="text-center">
-              <a href="#" className="text-xs text-primary hover:underline">Forgot Password?</a>
+              <Link to="/forgot-password" className="text-xs text-primary hover:underline">Forgot Password?</Link>
             </div>
           </form>
           <hr className="my-4" />

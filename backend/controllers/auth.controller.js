@@ -85,4 +85,56 @@ const getMe = async (req, res) => {
   }
 }
 
-module.exports = { login, getMe }
+const resetPassword = async (req, res) => {
+  const { role, identifier, verification, newPassword } = req.body
+
+  if (!role || !identifier || !newPassword) {
+    return res.status(400).json({ message: 'Role, identifier, and new password are required' })
+  }
+
+  if (newPassword.length < 6) {
+    return res.status(400).json({ message: 'New password must be at least 6 characters' })
+  }
+
+  try {
+    let user = null
+
+    if (role === 'student') {
+      const isEmailOrMobile = identifier.includes('@') || /^\d{10}$/.test(identifier)
+      const needsVerification = !isEmailOrMobile
+
+      user = await Student.findOne({ $or: [{ uid: identifier }, { email: identifier }, { mobile: identifier }] })
+      if (!user) {
+        return res.status(404).json({ message: 'Student account not found' })
+      }
+
+      if (needsVerification && !verification) {
+        return res.status(400).json({ message: 'Please provide your registered email or mobile for verification' })
+      }
+      if (verification && verification !== user.email && verification !== user.mobile) {
+        return res.status(401).json({ message: 'Verification does not match registered contact details' })
+      }
+    } else if (role === 'institute') {
+      if (!verification) {
+        return res.status(400).json({ message: 'Please provide the registered institute mobile number for verification' })
+      }
+
+      user = await Institute.findOne({ code: identifier, 'contact.mobile': verification })
+      if (!user) {
+        return res.status(404).json({ message: 'Institute account not found or mobile does not match' })
+      }
+    } else {
+      return res.status(400).json({ message: 'Password reset is only available for students and institutes. Please contact admin for state or ministry accounts.' })
+    }
+
+    user.password = newPassword
+    await user.save()
+
+    return res.json({ message: 'Password updated successfully. Please log in with your new password.' })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ message: 'Server error during password reset' })
+  }
+}
+
+module.exports = { login, getMe, resetPassword }

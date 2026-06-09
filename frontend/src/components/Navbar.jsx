@@ -34,7 +34,7 @@ export default function Navbar({ userType, onLogout }) {
   const isInstitute = userType === 'institute' || user?.role === 'institute' || user?.type === 'institute' || user?.userType === 'institute'
 
   return (
-    <nav className="bg-primary/95 text-white shadow-[0_25px_50px_rgba(26,107,60,0.18)] border-b border-white/10 backdrop-blur-sm">
+    <nav className="bg-primary/90 text-white shadow-[0_25px_50px_rgba(26,107,60,0.22)] border-b border-white/10 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Brand */}
         <button type="button" onClick={() => handleNavTo('/')} className="flex items-center gap-3">

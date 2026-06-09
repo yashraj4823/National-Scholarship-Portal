@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import FieldError from '../components/FieldError'
@@ -58,23 +58,23 @@ export default function Login() {
       <Navbar />
       <main className="flex-1 flex items-center justify-center py-10 px-4">
         <div className="w-full max-w-md">
-          <div className="page-hero mb-6">
+          <div className="hero-panel mb-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20">
+              <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center shadow-lg shadow-white/10">
                 <span className="text-white font-bold text-sm">NSP</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-slate-900">Welcome Back</h1>
-                <p className="text-sm text-slate-500">Secure login to manage scholarships and applications.</p>
+                <h1 className="hero-title">Welcome back to NSP</h1>
+                <p className="text-sm text-slate-100">Secure login to manage scholarships and applications.</p>
               </div>
             </div>
-            <div className="space-y-2 text-sm text-slate-600">
-              <p className="leading-6">Access your dashboard, review applications, and stay updated with your current scholarship status.</p>
+            <div className="space-y-3 text-sm text-slate-100">
+              <p className="leading-7">Access your dashboard, review applications, and stay updated with your current scholarship status.</p>
             </div>
           </div>
-          <div className="card border-t-4 border-primary">
+          <div className="glass-card border-t-4 border-primary p-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20">
                 <span className="text-white font-bold text-xs">NSP</span>
               </div>
               <div>
@@ -82,9 +82,9 @@ export default function Login() {
                 <p className="text-xs text-gray-500">Government of India</p>
               </div>
             </div>
-            </div>
+            
 
-          {apiError && (
+            {apiError && (
             <div className="mb-4 bg-red-50 border border-red-200 text-red-700 text-xs rounded p-3">
               {apiError}
             </div>
@@ -131,11 +131,15 @@ export default function Login() {
             <button type="submit" disabled={loading} className="btn-primary w-full">
               {loading ? 'Logging in...' : 'Login'}
             </button>
+            <div className="mt-3 text-right text-xs">
+              <Link to="/forgot-password" className="text-primary hover:underline">Forgot Password?</Link>
+            </div>
           </form>
           <div className="mt-6 text-center text-xs text-slate-500">
             <p>Need help? Contact support at <span className="text-highlight">helpdesk@nsp.gov.in</span></p>
           </div>
         </div>
+      </div>
       </main>
       <Footer />
     </div>
