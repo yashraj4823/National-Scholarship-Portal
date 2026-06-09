@@ -34,8 +34,8 @@ export default function Navbar({ userType, onLogout }) {
   const isInstitute = userType === 'institute' || user?.role === 'institute' || user?.type === 'institute' || user?.userType === 'institute'
 
   return (
-    <nav className="bg-primary text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+    <nav className="bg-primary/95 text-white shadow-[0_25px_50px_rgba(26,107,60,0.18)] border-b border-white/10 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Brand */}
         <button type="button" onClick={() => handleNavTo('/')} className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
@@ -76,7 +76,7 @@ export default function Navbar({ userType, onLogout }) {
             <Link to="/dashboard/institute/profile" className="hover:text-green-200 transition-colors">Profile</Link>
           )}
           {userType && (
-            <button onClick={handleLogout} className="bg-white text-primary px-3 py-1 rounded text-xs font-bold hover:bg-green-100 transition-colors">
+            <button onClick={handleLogout} className="bg-white/95 text-primary px-4 py-2 rounded-full text-xs font-bold hover:bg-white transition">
               Logout
             </button>
           )}
@@ -116,7 +116,7 @@ export default function Navbar({ userType, onLogout }) {
             <Link to="/dashboard/institute/profile" className="hover:text-green-200" onClick={() => setOpen(false)}>Profile</Link>
           )}
           {userType && (
-            <button onClick={handleLogout} className="bg-white text-primary px-3 py-1.5 rounded text-xs font-bold w-fit hover:bg-green-100 transition-colors">
+            <button onClick={handleLogout} className="bg-white/95 text-primary px-4 py-2 rounded-full text-xs font-bold w-fit hover:bg-white transition">
               Logout
             </button>
           )}

@@ -76,6 +76,23 @@ export default function Home() {
         Scholarships for Students | Empowering Education | Government of India Initiative
       </div>
 
+      <section className="max-w-7xl mx-auto w-full px-4 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="card-alt">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-primary">Trusted Scholarship Platform</p>
+            <p className="mt-3 text-sm text-slate-600">National Scholarship Portal helps students apply, track, and receive scholarships with a secure and modern interface.</p>
+          </div>
+          <div className="card-alt">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-primary">Faster Approval Flow</p>
+            <p className="mt-3 text-sm text-slate-600">Streamlined application submission and approval status updates make every step easier for applicants and institutes.</p>
+          </div>
+          <div className="card-alt">
+            <p className="text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-primary">Transparent Process</p>
+            <p className="mt-3 text-sm text-slate-600">Track your application progress in real time and stay informed with clear status updates.</p>
+          </div>
+        </div>
+      </section>
+
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* Left */}
@@ -92,9 +109,9 @@ export default function Home() {
             </ul>
           </div>
           <div className="card border-l-4 border-secondary">
-            <h2 className="section-title" style={{ color: '#f97316', borderColor: '#f97316' }}>Helpdesk</h2>
-            <p className="text-xs text-gray-600 mb-2">For technical issues or queries:</p>
-            <p className="text-xs font-semibold">📞 Toll Free: 1800-XXX-XXXX</p>
+            <h2 className="section-title section-title-secondary">Helpdesk</h2>
+            <p className="text-xs text-slate-600 mb-2">For technical issues or queries:</p>
+            <p className="text-xs font-semibold">📞 Toll Free: 1800-101-3898</p>
             <p className="text-xs font-semibold">✉ helpdesk@nsp.gov.in</p>
             <p className="text-xs text-gray-500 mt-2">Mon–Fri: 9:00 AM – 6:00 PM</p>
           </div>

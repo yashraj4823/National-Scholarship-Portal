@@ -23,6 +23,11 @@ export default function StudentProfile() {
       <Navbar userType="student" onLogout={() => { logout(); window.location.href = '/' }} />
 
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
+        <div className="page-hero text-center">
+          <p className="text-sm uppercase tracking-[0.24em] text-primary font-semibold">Profile Overview</p>
+          <h1 className="mt-2 text-3xl font-bold text-slate-900">Your NSP Account</h1>
+          <p className="mt-3 text-sm text-slate-600">Review your personal details and bank information securely.</p>
+        </div>
         <div className="card">
           <h2 className="section-title">My Profile</h2>
 

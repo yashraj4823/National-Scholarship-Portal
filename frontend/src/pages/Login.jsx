@@ -57,16 +57,32 @@ export default function Login() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 flex items-center justify-center py-10 px-4">
-        <div className="card w-full max-w-md border-t-4 border-primary">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xs">NSP</span>
+        <div className="w-full max-w-md">
+          <div className="page-hero mb-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-primary/20">
+                <span className="text-white font-bold text-sm">NSP</span>
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-slate-900">Welcome Back</h1>
+                <p className="text-sm text-slate-500">Secure login to manage scholarships and applications.</p>
+              </div>
             </div>
-            <div>
-              <h1 className="font-bold text-primary">National Scholarship Portal</h1>
-              <p className="text-xs text-gray-500">Government of India</p>
+            <div className="space-y-2 text-sm text-slate-600">
+              <p className="leading-6">Access your dashboard, review applications, and stay updated with your current scholarship status.</p>
             </div>
           </div>
+          <div className="card border-t-4 border-primary">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-xs">NSP</span>
+              </div>
+              <div>
+                <h1 className="font-bold text-primary">National Scholarship Portal</h1>
+                <p className="text-xs text-gray-500">Government of India</p>
+              </div>
+            </div>
+            </div>
 
           {apiError && (
             <div className="mb-4 bg-red-50 border border-red-200 text-red-700 text-xs rounded p-3">
@@ -116,6 +132,9 @@ export default function Login() {
               {loading ? 'Logging in...' : 'Login'}
             </button>
           </form>
+          <div className="mt-6 text-center text-xs text-slate-500">
+            <p>Need help? Contact support at <span className="text-highlight">helpdesk@nsp.gov.in</span></p>
+          </div>
         </div>
       </main>
       <Footer />

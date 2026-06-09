@@ -53,6 +53,14 @@ export default function StudentDashboard() {
       <Navbar userType="student" onLogout={handleLogout} />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-6">
+        <div className="page-hero flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm uppercase tracking-[0.24em] text-primary font-semibold">Student Dashboard</p>
+            <h1 className="mt-2 text-2xl font-bold text-slate-900">Welcome back, {user?.name?.split(' ')[0] || 'Student'}</h1>
+            <p className="mt-2 text-sm text-slate-600 max-w-2xl">Track applications, view scholarship schemes, and manage your profile from one place.</p>
+          </div>
+          <button className="btn-primary w-full sm:w-auto text-sm" onClick={() => navigate('/dashboard/student/profile')}>View Profile</button>
+        </div>
         <button className="lg:hidden w-full mb-4 btn-secondary text-xs" onClick={() => setSidebarOpen(o => !o)}>
           {sidebarOpen ? 'Hide Profile & Status ▲' : 'Show Profile & Status ▼'}
         </button>

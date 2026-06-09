@@ -102,6 +102,13 @@ export default function InstituteRegister() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
+        <div className="page-hero">
+          <div className="text-center">
+            <p className="text-sm text-primary font-semibold uppercase tracking-[0.24em] mb-3">Institute Registration</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Register your institution with NSP</h1>
+            <p className="text-sm text-slate-600 mt-3 max-w-2xl mx-auto">Submit institute details securely so your students can access scholarship applications through the portal.</p>
+          </div>
+        </div>
         <div className="card">
           <h1 className="text-center font-bold text-primary text-base sm:text-lg mb-6 uppercase tracking-wide">
             Institute Registration Request Form
