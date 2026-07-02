@@ -34,6 +34,9 @@ app.use('/api/schemes', require('./routes/scheme.routes'))
 app.use('/api/state', require('./routes/state.routes'))
 app.use('/api/ministry', require('./routes/ministry.routes'))
 
+// Root route for deployed hosts
+app.get('/', (req, res) => res.json({ status: 'NSP Backend is running', apiBase: '/api' }))
+
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'NSP Backend is running' }))
 
