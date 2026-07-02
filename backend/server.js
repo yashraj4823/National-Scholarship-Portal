@@ -11,12 +11,28 @@ const allowedOrigins = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(',').map((origin) => origin.trim())
   : ['http://localhost:5173']
 
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true
+  if (allowedOrigins.includes(origin)) return true
+
+  try {
+    const requestedHost = new URL(origin).hostname
+
+    return allowedOrigins.some((allowedOrigin) => {
+      if (!allowedOrigin.includes('.netlify.app')) return false
+      const allowedHost = new URL(allowedOrigin).hostname
+      return requestedHost === allowedHost || requestedHost.endsWith(`--${allowedHost}`)
+    })
+  } catch (err) {
+    return false
+  }
+}
+
 // Middleware
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true)
-      if (allowedOrigins.includes(origin)) return callback(null, true)
+      if (isAllowedOrigin(origin)) return callback(null, true)
       callback(new Error('CORS policy violation'))
     },
     credentials: true,
